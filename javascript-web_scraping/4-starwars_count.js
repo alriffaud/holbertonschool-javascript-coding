@@ -9,20 +9,16 @@ if (process.argv.length !== 3) {
 const apiUrl = process.argv[2];
 request.get(apiUrl, (error, response, body) => {
   if (error) {
-    console.error('Error:', error);
-    return;
-  }
-  if (response.statusCode !== 200) {
-    console.error('Unexpected status code:', response.statusCode);
-    return;
-  }
-  const data = JSON.parse(body);
-  let count = 0;
-  for (const film of data.results) {
-    for (const character of film.characters) {
-      if (character.includes('18')) {
-        count++;
-        break;
+    console.log(err);
+  } else {
+    const data = JSON.parse(body);
+    let count = 0;
+    for (const film of data.results) {
+      for (const character of film.characters) {
+        if (character.includes('18')) {
+          count++;
+          break;
+        }
       }
     }
   }
