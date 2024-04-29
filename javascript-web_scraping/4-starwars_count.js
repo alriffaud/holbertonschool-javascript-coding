@@ -8,10 +8,12 @@ request.get(apiUrl, (error, response, body) => {
   } else {
     const data = JSON.parse(body).results;
     let count = 0;
-    data.forEach(character => {
-      if (character.includes('18')) {
-        count++;
-      }
+    data.forEach(film => {
+      film.characters.forEach(character => {
+        if (character.includes('18')) {
+          count++;
+        }
+      });
     });
     console.log(count);
   }
