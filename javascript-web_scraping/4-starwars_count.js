@@ -9,7 +9,7 @@ if (process.argv.length !== 3) {
 const apiUrl = process.argv[2];
 request.get(apiUrl, (error, response, body) => {
   if (error) {
-    console.error('Error:', error);
+    console.error(error);
     return;
   }
   if (response.statusCode !== 200) {
