@@ -5,20 +5,20 @@ const apiUrl = process.argv[2];
 
 request(apiUrl, (error, response, body) => {
   if (error) {
-    console.error("Error fetching data from API:", error);
+    console.error('Error fetching data from API:', error);
     return;
   }
 
   processData(body);
 });
 
-function processData(body) {
+function processData (body) {
   const tasks = JSON.parse(body);
   const completedTasks = countCompletedTasks(tasks);
   console.log(completedTasks);
 }
 
-function countCompletedTasks(tasks) {
+function countCompletedTasks (tasks) {
   const completedTasks = {};
 
   for (const task of tasks) {
