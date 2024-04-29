@@ -8,8 +8,8 @@ request(apiUrl, (error, response, body) => {
   } else {
     const data = JSON.parse(body).results;
     let count = 0;
-    data.forEach(result => {
-      if (result.characters && result.characters.some(character => character.includes('18'))) {
+    data.forEach(character => {
+      if (character.includes('18')) {
         count++;
       }
     });
