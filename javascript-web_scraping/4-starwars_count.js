@@ -6,14 +6,14 @@ request.get(apiUrl, (error, response, body) => {
   if (error) {
     console.error(error.message);
   }
-    const data = JSON.parse(body).results;
-    let count = 0;
-    data.forEach(film => {
-      film.characters.forEach(characterUrl => {
-        if (characterUrl.includes('18')) {
-          count++;
-        }
-      });
+  const data = JSON.parse(body).results;
+  let count = 0;
+  data.forEach(film => {
+    film.characters.forEach(characterUrl => {
+      if (characterUrl.includes('18')) {
+        count++;
+      }
     });
-    console.log(count);
+  });
+  console.log(count);
 });
