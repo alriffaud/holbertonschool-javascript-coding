@@ -9,11 +9,12 @@ request.get(apiUrl, { json: true }, (err, response, body) => {
     return;
   }
   const completedTasks = {};
-  const todo = JSON.parse(body);
-  todo.forEach(task => {
+  body.forEach(task => {
     if (task.completed) {
-      if (!completedTasks[task.userId]) completedTasks[task.userId] = 1;
-      else completedTasks[task.userId] += 1;
+      if (!completedTasks[task.userId]) {
+        completedTasks[task.userId] = 0;
+      }
+      completedTasks[task.userId]++;
     }
   });
   console.log(completedTasks);
