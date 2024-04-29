@@ -13,7 +13,7 @@ request.get(apiUrl, (error, response, body) => {
     return;
   }
   if (response.statusCode !== 200) {
-    console.error('Unexpected status code:', response.statusCode);
+    console.error(response.statusCode);
     return;
   }
   const films = JSON.parse(body).results;
