@@ -1,23 +1,22 @@
 #!/usr/bin/node
 // This script computes the number of tasks completed by user id.
 const request = require('request');
-const url = process.argv[2];
 
-request(url, (err, res, body) => {
-  if (err) {
-    console.log(err);
+const filmsUrl = process.argv[2];
+let counter = 0;
+
+request(filmsUrl, (error, response, body) => {
+  if (error) {
+    console.error(error);
     return;
   }
-  const completedTasks = {};
-  const tasks = JSON.parse(body);
-  for (const task of tasks) {
-    if (task.completed === true) {
-      if (completedTasks[task.userId] === undefined) {
-        completedTasks[task.userId] = 1;
-      } else {
-        completedTasks[task.userId] += 1;
+  const allMovies = JSON.parse(body);
+  for (const result of allMovies.results) {
+    for (const character of result.characters) {
+      if (character.includes('18')) {
+        counter += 1;
       }
     }
   }
-  console.log(completedTasks);
+  console.log(counter);
 });
