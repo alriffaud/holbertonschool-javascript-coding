@@ -9,8 +9,8 @@ request.get(apiUrl, (error, response, body) => {
     const data = JSON.parse(body).results;
     let count = 0;
     data.forEach(film => {
-      film.characters.forEach(character => {
-        if (character.includes('18')) {
+      film.characters.forEach(characterUrl => {
+        if (characterUrl.includes('18')) {
           count++;
         }
       });
