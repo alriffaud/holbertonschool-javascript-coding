@@ -12,10 +12,6 @@ request.get(apiUrl, (error, response, body) => {
     console.error(error);
     return;
   }
-  if (response.statusCode !== 200) {
-    console.error(response.statusCode);
-    return;
-  }
   const films = JSON.parse(body).results;
   let count = 0;
   for (const film of films) {
