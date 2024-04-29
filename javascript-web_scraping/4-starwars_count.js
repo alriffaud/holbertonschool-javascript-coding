@@ -9,18 +9,17 @@ if (process.argv.length !== 3) {
 const apiUrl = process.argv[2];
 request.get(apiUrl, (error, response, body) => {
   if (error) {
-    console.log(err);
+    console.log(error);
   } else {
-    const data = JSON.parse(body);
     let count = 0;
-    for (const film of data.results) {
-      for (const character of film.characters) {
+    const films = JSON.parse(body).results;
+    for (const result of films) {
+      for (const character of result.characters) {
         if (character.includes('18')) {
           count++;
-          break;
         }
       }
     }
+    console.log(count);
   }
-  console.log(count);
 });
