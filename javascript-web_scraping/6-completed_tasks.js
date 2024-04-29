@@ -5,19 +5,31 @@ const apiUrl = process.argv[2];
 
 request(apiUrl, (error, response, body) => {
   if (error) {
-    console.error(error);
-  } else {
-    const tasks = JSON.parse(body);
-    const completedTasks = {};
-    for (const task of tasks) {
-      if (task.completed) {
-        if (completedTasks[task.userId]) {
-          completedTasks[task.userId]++;
-        } else {
-          completedTasks[task.userId] = 1;
-        }
+    console.error("Error fetching data from API:", error);
+    return;
+  }
+
+  processData(body);
+});
+
+function processData(body) {
+  const tasks = JSON.parse(body);
+  const completedTasks = countCompletedTasks(tasks);
+  console.log(completedTasks);
+}
+
+function countCompletedTasks(tasks) {
+  const completedTasks = {};
+
+  for (const task of tasks) {
+    if (task.completed) {
+      if (completedTasks[task.userId]) {
+        completedTasks[task.userId]++;
+      } else {
+        completedTasks[task.userId] = 1;
       }
     }
-    console.log(completedTasks);
   }
-});
+
+  return completedTasks;
+}
