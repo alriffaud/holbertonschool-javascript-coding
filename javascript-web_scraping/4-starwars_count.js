@@ -9,17 +9,19 @@ if (process.argv.length !== 3) {
 const apiUrl = process.argv[2];
 request.get(apiUrl, (error, response, body) => {
   if (error) {
-    console.log(error);
-  } else {
-    let count = 0;
-    const films = JSON.parse(body).results;
-    for (const result of films) {
-      for (const character of result.characters) {
-        if (character.includes('18')) {
-          count++;
-        }
-      }
-    }
-    console.log(count);
+    console.error('Error:', error);
+    return;
   }
+  if (response.statusCode !== 200) {
+    console.error('Unexpected status code:', response.statusCode);
+    return;
+  }
+  const films = JSON.parse(body).results;
+  let count = 0;
+  for (const film of films) {
+    if (film.characters.includes('https://swapi-api.hbtn.io/api/people/18/')) {
+      count++;
+    }
+  }
+  console.log(count);
 });
