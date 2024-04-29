@@ -3,9 +3,10 @@
 const request = require('request');
 const apiUrl = process.argv[2];
 
-request.get(apiUrl, (err, response, body) => {
+request.get(apiUrl, { json: true }, (err, response, body) => {
   if (err) {
     console.log(err);
+    return;
   }
   const completedTasks = {};
   const todo = JSON.parse(body);
