@@ -1,15 +1,14 @@
 // This script creates a program named 1-stdin.js that will be executed through command line.
-const readline = require('readline');
+/* eslint-disable */
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+process.stdin.on('readable', () => {
+  const name = process.stdin.read();
+  if (name !== null) {
+    process.stdout.write(`Your name is: ${name}`);
+  }
 });
-// eslint-disable-next-line jest/require-hook
-console.log('Welcome to Holberton School, what is your name?');
-// eslint-disable-next-line jest/require-hook
-rl.on('line', (input) => {
-  console.log(`Your name is: ${input}`);
-  console.log('This important software is now closing');
-  rl.close();
+
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });
