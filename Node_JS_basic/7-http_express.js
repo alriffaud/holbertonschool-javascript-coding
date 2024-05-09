@@ -47,7 +47,7 @@ app.get('/students', (req, res) => {
       res.end(data.join('\n'));
     })
     .catch((err) => {
-      res.send(err.message);
+      res.status(500).send(err.message);
     });
 });
 // eslint-disable-next-line jest/require-hook
