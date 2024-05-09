@@ -36,10 +36,14 @@ async function countStudents(path) {
 const app = express();
 // eslint-disable-next-line jest/require-hook
 app.get('/', (req, res) => {
-  res.status(200).send('Hello Holberton School!');
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.send('Hello Holberton School!');
 });
 // eslint-disable-next-line jest/require-hook
 app.get('/students', (req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
   const path = process.argv[2];
   res.write('This is the list of our students\n');
   countStudents(path)
@@ -47,7 +51,7 @@ app.get('/students', (req, res) => {
       res.end(data.join('\n'));
     })
     .catch((err) => {
-      res.status(500).send(err.message);
+      res.end(err.message);
     });
 });
 // eslint-disable-next-line jest/require-hook
